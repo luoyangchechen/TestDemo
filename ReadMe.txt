@@ -7,3 +7,4 @@
 5.自定义实现mystrlen()、mystrcpy()函数
 6.mystrcmp()函数
 7.自定义函数 Stringcount
+8.重装系统后，远程仓库和本地仓库关联
