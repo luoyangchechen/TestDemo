@@ -8,3 +8,4 @@
 6.mystrcmp()函数
 7.自定义函数 Stringcount
 8.C++文件操作
+9.vector的用法
