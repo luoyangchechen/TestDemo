@@ -9,3 +9,4 @@
 7.自定义函数 Stringcount
 8.C++文件操作
 9.vector的用法
+10.atof 和 stol 转换无效值的区别
