@@ -25,8 +25,20 @@ namespace MyList
 		//从尾部添加
 		void AddTail(DATA nNum);
 
-		//查找节点
+		/*插入节点
+		*param npos 插入节点位置 例如:插入到3 的后面
+		*param nNum 新节点
+		*return 成功 0;-1 失败
+		*/
+		int InsertNode(DATA npos,DATA nNum);
+
+		//查找节点位置
 		//return 第几个节点成功找到;-1没找到
+		int FindNodeIndex(DATA nNum);
+
+		/*查到节点
+		* return 0 找到;-1没有找到
+		*/
 		int FindNode(DATA nNum);
 
 		//删除节点
@@ -38,6 +50,9 @@ namespace MyList
 
 		//打印节点
 		void PrintALL();
+
+		//删除所有节点
+		void DeleteAll();
 
 	private:
 		SNode* m_pHead;//头节点

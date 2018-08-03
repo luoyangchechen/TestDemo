@@ -6,6 +6,8 @@ int main()
 {
 	MyList::CMyList list;
 
+	list.DeleteNode(999);
+
 	list.AddHead(1);
 	list.AddHead(2);
 	list.AddHead(3);
@@ -15,7 +17,7 @@ int main()
 	puts("修改后");
 	list.PrintALL();
 
-	int i = list.FindNode(-88);
+	int i = list.FindNodeIndex(-88);
 	if (i >= 0)
 	{
 		cout << "第" << i+1 << "个节点找到" <<endl;
@@ -37,6 +39,20 @@ int main()
 
 	puts("尾部添加");
 	list.AddTail(4);
+	list.PrintALL();
+
+	//修改节点
+	list.ModifyNode(-88,0);
+
+	puts("插入节点3");
+	//插入节点
+	i = list.InsertNode(4,3);
+
+
+	list.PrintALL();
+
+	puts("清空链表");
+	list.DeleteAll();
 	list.PrintALL();
 
 	return 0;

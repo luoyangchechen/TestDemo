@@ -30,6 +30,12 @@ namespace MyList
 		pNew->data = nNum;
 		pNew->pNext = NULL;
 
+		if (!m_pHead)
+		{
+			m_pHead = pNew;
+			return;
+		}
+
 		SNode* p = m_pHead;
 		SNode* p1 = NULL;
 		while (p)
@@ -41,10 +47,17 @@ namespace MyList
 		//跳出循环时，p1记录的时最后一个节点,让最后一个节点的pNext指向新创建的节点
 		p = p1;
 		p->pNext = pNew;
+
+
+		//另一种写法
+		//while(p->pNext != NULL)
+		//	p=p->pNext;
+
+		//p->pNext = pNew;
 	
 	}
 
-	int CMyList::FindNode(DATA nNum)
+	int CMyList::FindNodeIndex(DATA nNum)
 	{
 		SNode* p = m_pHead;
 		int i =0;
@@ -66,6 +79,11 @@ namespace MyList
 	{
 		SNode* p = m_pHead;
 		SNode* p1 = NULL;//记录前一个节点
+
+		if (p == NULL)//当前链表为空
+		{
+			return -1;
+		}
 
 		//头节点没有前一个节点，要特殊处理
 		if (p->data == nNum)
@@ -108,11 +126,79 @@ namespace MyList
 	void CMyList::PrintALL()
 	{
 		SNode* p = m_pHead;
+		if (p == NULL)
+		{
+			printf("当前链表为空\n");
+			return;
+		}
 		while(p)//
 		{
 			cout << p->data << endl;
 			p = p->pNext;
 		}
+	}
+
+	int CMyList::FindNode(DATA nNum)
+	{
+		SNode* p = m_pHead;
+		while (p)
+		{
+			if (p->data == nNum)
+			{
+				return 0;
+			}
+
+			p=p->pNext;
+		}
+		return -1;
+	}
+
+	int CMyList::InsertNode(DATA npos,DATA nNum)
+	{
+
+		SNode* pNew = new SNode;//C++ 方式
+		pNew->data = nNum;
+		pNew->pNext = NULL;
+	
+
+		SNode* p = m_pHead;
+
+		//if (p->data == npos)//头结点
+		//{
+		//	pNew->pNext=p->pNext;//头节点指向的下一个节点指针放到新节点的pNext
+		//	p->pNext=pNew;//头节点pNext指向新节点
+
+		//	return 0;
+		//}
+
+		while(p)
+		{
+			if (p->data == npos)
+			{
+				pNew->pNext = p->pNext;
+				p->pNext=pNew;
+
+				return 0;
+			}
+			p = p->pNext;
+		}
+
+		return -1;
+	}
+
+	void CMyList::DeleteAll()
+	{
+		SNode* p = m_pHead;
+		SNode* p1 = NULL;
+		while(p)
+		{
+			p1=p;
+			p= p->pNext;
+
+			delete p1;
+		}
+
+		m_pHead = NULL;
 	}
 
 };
