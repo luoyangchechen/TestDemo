@@ -331,6 +331,276 @@ int SortMenu()
 	return i;
 }
 
+int DeleteByName()
+{
+	PrintAll();
+
+	char name[20];
+	printf("请输入姓名:");
+
+	scanf("%s",name);
+
+	SNode* p = g_Head;
+	SNode* p1 = NULL;//记录前一个节点
+	if (!p)
+	{
+		return 0;
+	}
+
+	//如果是头节点要特殊处理
+	if(strcmp(p->data.sName,name)== 0)
+	{
+		g_Head = p->pNext;
+		delete p;
+		return 1;
+	}
+	while(p)
+	{
+		if (strcmp(p->data.sName,name)== 0)
+		{
+			p1->pNext=p->pNext;
+			free(p);
+			return 1;
+		}
+		p1=p;
+		p=p->pNext;
+	}
+
+	return 0;
+}
+
+int DeleteByNum()
+{
+	PrintAll();
+	int iNum =0;
+	printf("请输入学号:");
+
+	scanf_s("%d",&iNum);
+
+	SNode* p = g_Head;
+	SNode* p1 = NULL;//记录前一个节点
+	if (!p)
+	{
+		return 0;
+	}
+
+	//如果是头节点要特殊处理
+	if(p->data.nNum== iNum)
+	{
+		g_Head = p->pNext;
+		delete p;
+		return 1;
+	}
+	while(p)
+	{
+		if (p->data.nNum== iNum)
+		{
+			p1->pNext=p->pNext;
+			free(p);
+			return 1;
+		}
+		p1=p;
+		p=p->pNext;
+	}
+	return 0;
+}
+
+int DeleteMenu()
+{
+	system("cls");
+	puts("\n\n\t\t1、按姓名删除:");
+	puts("\t\t2、按学号删除:");
+	puts("\t\t0、退出回主菜单:");
+
+	int i = 0,j=0;
+
+	scanf_s("%d",&i);
+
+	switch(i)
+	{
+	case 1:
+		j = DeleteByName();
+		if(j>0)
+		{
+			printf("删除成功!");
+		}
+		else
+		{
+			printf("删除失败!");
+		}
+		break;
+	case 2:
+		j = DeleteByNum();
+		if(j>0)
+		{
+			printf("删除成功!");
+		}
+		else
+		{
+			printf("删除失败!");
+		}
+		break;
+	default:
+		return i;
+	}
+	PrintAll();
+
+	return i;
+}
+
+int FindByName()
+{
+	char name[20];
+	printf("请输入姓名:");
+
+	scanf("%s",name);
+
+	SNode* p = g_Head;
+	while (p)
+	{
+		if (strcmp(p->data.sName,name)==0)
+		{
+			puts("学号\t姓名\t数学");
+			
+			printf("%d\t%s\t%0.1f\n",p->data.nNum,p->data.sName,p->data.fMath);
+			return 1;
+		}
+
+		p=p->pNext;
+	}
+	return 0;
+}
+
+int FindByNum()
+{
+	int iNum =0;
+	printf("请输入学号:");
+
+	scanf_s("%d",&iNum);
+
+	SNode* p = g_Head;
+	while (p)
+	{
+		if (p->data.nNum == iNum)
+		{
+			puts("学号\t姓名\t数学");
+
+			printf("%d\t%s\t%0.1f\n",p->data.nNum,p->data.sName,p->data.fMath);
+			return 1;
+		}
+
+		p=p->pNext;
+	}
+	return 0;
+}
+
+int FindMenu()
+{
+	system("cls");
+	puts("\n\n\t\t1、按姓名查找:");
+	puts("\t\t2、按学号查找:");
+	puts("\t\t0、退出回主菜单:");
+
+	int i = 0;
+
+	scanf_s("%d",&i);
+
+	switch(i)
+	{
+	case 1:
+		FindByName();
+		break;
+	case 2:
+		FindByNum();
+		break;
+	default:
+		return i;
+	}
+	system("pause");
+	return i;
+}
+int ModifyByName()
+{
+	char name[20];
+	float fmath =0.0;
+	printf("请输入姓名:");
+	scanf("%s",name);
+	printf("请输入新成绩:");
+	scanf("%f",&fmath);
+
+	SNode* p = g_Head;
+	while (p)
+	{
+		if (strcmp(p->data.sName,name)==0)
+		{
+			printf("修改前:%d\t%s\t%0.1f\n",p->data.nNum,p->data.sName,p->data.fMath);
+			p->data.fMath=fmath;
+
+			puts("学号\t姓名\t数学");
+
+			printf("修改后:%d\t%s\t%0.1f\n",p->data.nNum,p->data.sName,p->data.fMath);
+			return 1;
+		}
+
+		p=p->pNext;
+	}
+	return 0;
+}
+
+int ModifyByNum()
+{
+	float fmath =0.0;
+	int iNum =0;
+	printf("请输入学号:");
+	scanf_s("%d",&iNum);
+	printf("请输入新成绩:");
+	scanf("%f",&fmath);
+
+	SNode* p = g_Head;
+	while (p)
+	{
+		if (p->data.nNum == iNum)
+		{
+			printf("修改前:%d\t%s\t%0.1f\n",p->data.nNum,p->data.sName,p->data.fMath);
+			p->data.fMath=fmath;
+			puts("学号\t姓名\t数学");
+
+			printf("修改后:%d\t%s\t%0.1f\n",p->data.nNum,p->data.sName,p->data.fMath);
+			return 1;
+		}
+
+		p=p->pNext;
+	}
+	return 0;
+}
+
+//只能修改成绩
+int ModifyMenu()
+{
+	system("cls");
+	puts("\n\n\t\t1、按姓名修改:");
+	puts("\t\t2、按学号修改:");
+	puts("\t\t0、退出回主菜单:");
+
+	int i = 0;
+
+	scanf_s("%d",&i);
+
+	switch(i)
+	{
+	case 1:
+		ModifyByName();
+		break;
+	case 2:
+		ModifyByNum();
+		break;
+	default:
+		return i;
+	}
+	system("pause");
+	return i;
+}
+
 int Menu()
 {
 	system("cls");//clear screen
@@ -355,10 +625,16 @@ int Menu()
 			;
 		break;
 	case 3:
+		while(DeleteMenu())
+			;
 		break;
 	case 4:
+		while(ModifyMenu())
+			;
 		break;
 	case 5:
+		while(FindMenu())
+			;
 		break;
 	case 6:
 		break;
