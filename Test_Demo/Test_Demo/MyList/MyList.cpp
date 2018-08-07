@@ -10,7 +10,7 @@ namespace MyList
 
 	CMyList::~CMyList()
 	{
-
+		DeleteAll();//释放内存
 	}
 
 	//从头部添加
