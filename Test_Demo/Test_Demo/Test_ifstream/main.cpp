@@ -4,6 +4,14 @@
 #include <atlstr.h>
 using namespace std;
 
+#define VS_RETURN_IF(expr) if(expr){return;}
+#define VS_RETURN_TRUE_IF(expr) if(expr){return true;}
+#define VS_RETURN_NULLSTR_IF(expr) if(expr){return "";}
+#define VS_RETURN_NULL_IF(expr) if(expr){return NULL;}
+#define VS_RETURN_FALSE_IF(expr) if(expr){return false;}
+#define VS_BREAK_IF(expr) if(expr){break;}
+#define VS_CONTINUE_IF(expr) if(expr){continue;}
+
 //Unicode ---> UTF-8
 std::string UnicodeToUTF8( const wstring& wstr )
 {
